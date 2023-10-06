@@ -1,4 +1,12 @@
-import request from './setup';
+import { request, connect, close } from './setup';
+
+beforeAll(async () => {
+  await connect();
+});
+
+afterAll(async () => {
+  await close();
+});
 
 describe('api/', () => {
   it('should work', async () => {
