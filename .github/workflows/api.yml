@@ -34,4 +34,4 @@ jobs:
       run: npm test
       env:
         CI: true
-        DATABASE_URL: "mongodb://root:secret@localhost:27017/test"
+        DATABASE_URL: "mongodb://root:secret@localhost:27017/test?authSource=admin"
