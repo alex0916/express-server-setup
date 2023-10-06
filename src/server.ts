@@ -7,8 +7,13 @@ dotenv.config();
 
 const port = process.env.PORT;
 
-mongodb();
-
-app.listen(port, () => {
-  logger.info(`Server is running at http://localhost:${port}`);
-});
+mongodb()
+  .then(() => {
+    logger.debug('Connected to MongoDB');
+    app.listen(port, () => {
+      logger.info(`Server is running at http://localhost:${port}`);
+    });
+  })
+  .catch((error) => {
+    logger.error(`MongoDB connection error ${error}`);
+  });
