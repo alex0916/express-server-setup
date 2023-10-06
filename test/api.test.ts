@@ -11,11 +11,6 @@ afterAll(async () => {
 describe('api/', () => {
   it('should work', async () => {
     const result = await request.get('/api/test');
-    expect(result.body).toEqual({
-      data: {
-        id: expect.any(String),
-        name: expect.any(String),
-      },
-    });
+    expect(result.body).toEqual({ data: 'Express + TypeScript Server' });
   });
 });
