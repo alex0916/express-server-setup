@@ -1,2 +1,2 @@
 # express-server-setup
-Express JS server setup with mongoDB and docker
+Express server setup with mongoDB / Postgres and docker
