@@ -12,6 +12,10 @@ COPY --chown=node package.json .
 COPY --chown=node package-lock.json .
 RUN npm ci
 
+COPY --chown=node prisma/schema.prisma prisma/schema.prisma
+COPY --chown=node prisma/migrations prisma/migrations
+RUN npm run db:prisma generate
+
 COPY --chown=node tsconfig.json .
 COPY --chown=node tsconfig.build.json .
 COPY --chown=node src src
@@ -20,6 +24,8 @@ RUN npm run build
 FROM base as dev
 COPY --chown=node package.json .
 COPY --chown=node package-lock.json .
+COPY --chown=node prisma/schema.prisma prisma/schema.prisma
+COPY --chown=node prisma/migrations prisma/migrations
 
 RUN npm install
 

@@ -8,7 +8,21 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
-        mongodb-version: ['4.2']
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: password
+          POSTGRES_USER: test
+          POSTGRES_DB: test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
 
     steps:
     - name: Git checkout
@@ -19,14 +33,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Start MongoDB
-      uses: supercharge/mongodb-github-action@1.10.0
-      with:
-        mongodb-version: ${{ matrix.mongodb-version }}
-        mongodb-username: root
-        mongodb-password: secret
-        mongodb-db: test
-
     - name: Install dependencies
       run: npm install
 
@@ -34,4 +40,4 @@ jobs:
       run: npm test
       env:
         CI: true
-        DATABASE_URL: "mongodb://root:secret@localhost:27017/test?authSource=admin"
+        DATABASE_URL: "postgres://test:password@localhost:5432/test?schema=public"
