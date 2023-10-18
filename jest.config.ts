@@ -12,7 +12,7 @@ const config: Config = {
   // collectCoverage: true,
   // coverageDirectory: 'coverage',
   // coverageReporters: ['text', 'html'],
-  rootDir: './test',
+  rootDir: './src',
   moduleFileExtensions: ['ts', 'js'],
 };
 

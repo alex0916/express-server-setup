@@ -1,4 +1,4 @@
-import { request, connect, close } from './setup';
+import { request, connect, close } from './utils/setup';
 
 beforeAll(async () => {
   await connect();

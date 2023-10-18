@@ -13,6 +13,7 @@ COPY --chown=node package-lock.json .
 RUN npm ci
 
 COPY --chown=node tsconfig.json .
+COPY --chown=node tsconfig.build.json .
 COPY --chown=node src src
 RUN npm run build
 
